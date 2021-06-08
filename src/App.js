@@ -24,8 +24,10 @@ function App() {
     let textToUrl = encodeURIComponent(userInput);
     let endPoint = `
     https://restcountries.eu/rest/v2/name/${textToUrl}`;
+
     console.log(endPoint);
 
+    // it also possible using promises
     // fetch(endPoint)
     // .then((res)=> res.json())
     // .then((data)=> setResult(data))
