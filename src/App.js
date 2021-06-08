@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Loading from "./components/Loading";
+import Country from "./components/Country";
+import axios from "axios";
 
 function App() {
+  const [userInput, setUserInput] = useState("");
+  const [results, setResults] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  function changeHandler(e) {
+    setUserInput(e.target.value);
+  }
+
+  function submitHandler(e) {
+    e.preventDefault();
+    let textToUrl = encodeURIComponent(userInput);
+    console.log(textToUrl);
+    let endPoint = `
+    https://restcountries.eu/rest/v2/name/${textToUrl}`;
+
+    // fetch(endPoint)
+    // .then((res)=> res.json())
+    // .then((data)=> setResult(data))
+
+    axios(endPoint)
+      .then(({ data }) => setResults(data))
+      .catch((err) => console.log(`Error ${err}`));
+  }
+
+  if (loading) return <Loading />;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <form onSubmit={submitHandler}>
+        <input
+          type="text"
+          value={userInput}
+          onChange={changeHandler}
+          placeholder="Write Country Name"
+        />
+        <button type="submit">Search</button>
+      </form>
+      <Country results={results} />
+    </React.Fragment>
   );
 }
 
