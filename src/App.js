@@ -22,9 +22,9 @@ function App() {
   function submitHandler(e) {
     e.preventDefault();
     let textToUrl = encodeURIComponent(userInput);
-    console.log(textToUrl);
     let endPoint = `
     https://restcountries.eu/rest/v2/name/${textToUrl}`;
+    console.log(endPoint);
 
     // fetch(endPoint)
     // .then((res)=> res.json())
@@ -39,7 +39,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className="form">
         <input
           type="text"
           value={userInput}
