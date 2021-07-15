@@ -23,7 +23,7 @@ const Country = ({ results }) => {
             <h3> Population: {population}</h3>
             <h4>Region: {region}</h4>
             <h4>Time Zone: {timezones}</h4>
-            {/* <h4>Langauge : {languages}</h4> */}
+            <h4>Langauge : {languages.map((language) => language.name)}</h4>
             <h4>code number: {numericCode}</h4>
           </div>
           <div>
