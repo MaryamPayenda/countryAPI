@@ -9,10 +9,9 @@ const Country = ({ results }) => {
       population,
       region,
       timezones,
-      borders,
+
       numericCode,
       languages,
-      altSpellings,
     } = obj;
     return (
       <div key={i}>
